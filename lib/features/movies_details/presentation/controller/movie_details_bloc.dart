@@ -45,7 +45,6 @@ class MovieDetailsBloc extends Bloc<BaseMovieDetailsEvent, MovieDetailsState> {
   }
   FutureOr<void> _getRecommendation(RecommendationEvent event, Emitter<MovieDetailsState> emit) async {
     final result = await recommendationUseCse(id: event.id,page: 1.toString());
-
     result.fold(
           (l) => emit(state.copyWith(
         recommendationRequestState: RequestState.failure,
@@ -57,6 +56,7 @@ class MovieDetailsBloc extends Bloc<BaseMovieDetailsEvent, MovieDetailsState> {
             emit(
               state.copyWith(
                 recommendationsEntity: r,
+
                 recommendationRequestState: RequestState.success,
               ),
             );
